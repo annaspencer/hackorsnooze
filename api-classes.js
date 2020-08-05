@@ -44,7 +44,6 @@ class StoryList {
 
 // deletes story from api
    static async removeStory(user, storyId) {
-     console.log(user)
     const token = user.loginToken;
     await axios({
       url: `${BASE_URL}/stories/${storyId}`,
@@ -53,13 +52,7 @@ class StoryList {
     });
      
    }
-// function for frontend to use to select story to be deleted
-  static async deleteStory(evt, user) {
-    const $closestLi = $(evt.target).closest("li");
-    const storyId = $closestLi.attr("id");
-    let currentUser = await User.getLoggedInUser(user.loginToken, user.username)
-    await StoryList.removeStory(currentUser, storyId);
-  }
+
 }
 
 

@@ -33,8 +33,8 @@ $(".star").on("click", async function(evt) {
 // delete
   $("#my-articles").on("click", ".trash-can", async function(evt) {
     evt.preventDefault();
-    let user = currentUser
-     await StoryList.deleteStory(evt, user);
+    let user = currentUser;
+    deleteStory(evt, user);
     location.reload();
   })
   // go to favorites list
@@ -216,7 +216,13 @@ async function generateStories() {
   
     $ownStories.show();
   }
-
+// function for frontend to use to select story to be deleted
+function deleteStory(evt, user) {
+  const $closestLi = $(evt.target).closest("li");
+  const storyId = $closestLi.attr("id");
+  let currentUser = await User.getLoggedInUser(user.loginToken, user.username)
+  await StoryList.removeStory(currentUser, storyId);
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~nav displays~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
