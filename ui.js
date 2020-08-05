@@ -217,7 +217,7 @@ async function generateStories() {
     $ownStories.show();
   }
 // function for frontend to use to select story to be deleted
-function deleteStory(evt, user) {
+  async function deleteStory(evt, user) {
   const $closestLi = $(evt.target).closest("li");
   const storyId = $closestLi.attr("id");
   let currentUser = await User.getLoggedInUser(user.loginToken, user.username)
